@@ -14,7 +14,7 @@ fun RepositoryHandler.deps() {
 object Config {
     object Libs {
         object All {
-            const val agp = "com.android.tools.build:gradle:3.6.0-beta02"
+            const val agp = "com.android.tools.build:gradle:3.5.2"
             const val ap =
                     "com.google.apis:google-api-services-androidpublisher:v3-rev20190910-1.30.1"
 
