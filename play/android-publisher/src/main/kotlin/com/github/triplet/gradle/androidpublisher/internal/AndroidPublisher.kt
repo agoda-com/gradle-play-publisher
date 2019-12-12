@@ -17,7 +17,12 @@ internal data class ServiceAccountAuth(
         val email: String?
 )
 
-internal fun createPublisher(auth: ServiceAccountAuth): AndroidPublisher {
+internal data class NetworkConfiguration(
+        val connectTimeout: Int?,
+        val readTimeout: Int = 0
+)
+
+internal fun createPublisher(auth: ServiceAccountAuth, network: NetworkConfiguration): AndroidPublisher {
     val transport = buildTransport()
     val factory = JacksonFactory.getDefaultInstance()
 
@@ -34,8 +39,11 @@ internal fun createPublisher(auth: ServiceAccountAuth): AndroidPublisher {
                 .build()
     }
 
-    return AndroidPublisher.Builder(transport, JacksonFactory.getDefaultInstance()) {
-        credential.initialize(it.setReadTimeout(0))
+    return AndroidPublisher.Builder(transport, JacksonFactory.getDefaultInstance()) { request ->
+        network.connectTimeout?.let { request.connectTimeout = it }
+        request.readTimeout = network.readTimeout
+
+        credential.initialize(request)
     }.setApplicationName(PLUGIN_NAME).build()
 }
 

@@ -30,8 +30,11 @@ internal fun PlayPublisherExtension.Config.buildPublisher(): AndroidPublisher {
                 .build()
     }
 
-    return AndroidPublisher.Builder(transport, JacksonFactory.getDefaultInstance()) {
-        credential.initialize(it.setReadTimeout(0))
+    return AndroidPublisher.Builder(transport, JacksonFactory.getDefaultInstance()) { request ->
+        connectTimeout?.let { request.connectTimeout = it }
+        request.readTimeout = readTimeout
+
+        credential.initialize(request)
     }.setApplicationName(PLUGIN_NAME).build()
 }
 

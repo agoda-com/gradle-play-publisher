@@ -14,7 +14,9 @@ internal abstract class PlayWorkerBase<T : PlayWorkerBase.PlayPublishingParams> 
     protected val publisher2 = PlayPublisher(
             config.serviceAccountCredentials!!,
             config.serviceAccountEmail,
-            appId
+            appId,
+            config.connectTimeout,
+            config.readTimeout
     )
 
     internal interface PlayPublishingParams : WorkParameters {

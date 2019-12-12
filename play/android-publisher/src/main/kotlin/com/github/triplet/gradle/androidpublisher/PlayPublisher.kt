@@ -78,7 +78,9 @@ interface PlayPublisher {
         fun create(
                 credentials: File,
                 email: String?,
-                appId: String
+                appId: String,
+                connectTimeout: Int?,
+                readTimeout: Int
         ): PlayPublisher
     }
 
@@ -87,8 +89,10 @@ interface PlayPublisher {
         operator fun invoke(
                 credentials: File,
                 email: String?,
-                appId: String
+                appId: String,
+                connectTimeout: Int?,
+                readTimeout: Int
         ): PlayPublisher = ServiceLoader.load(Factory::class.java).last()
-                .create(credentials, email, appId)
+                .create(credentials, email, appId, connectTimeout, readTimeout)
     }
 }

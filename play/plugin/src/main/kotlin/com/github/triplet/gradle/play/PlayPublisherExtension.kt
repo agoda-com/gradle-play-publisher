@@ -216,6 +216,22 @@ open class PlayPublisherExtension @JvmOverloads constructor(
             _config.artifactDir = value
         }
 
+    @get:Optional
+    @get:Input
+    var connectTimeout: Int?
+        get() = _config.connectTimeout
+        set(value) {
+            _config.connectTimeout = value
+        }
+
+    @get:Optional
+    @get:Input
+    var readTimeout: Int
+        get() = _config.readTimeout
+        set(value) {
+            _config.readTimeout = value
+        }
+
     /**
      * @return the configuration for your app's retainable objects such as previous artifacts and
      * OBB files.
@@ -274,6 +290,8 @@ open class PlayPublisherExtension @JvmOverloads constructor(
             var releaseStatus: ReleaseStatus? = null,
             var releaseName: String? = null,
             var artifactDir: File? = null,
+            var connectTimeout: Int? = null,
+            var readTimeout: Int = 0,
 
             val retain: Retain = Retain()
     ) : Serializable

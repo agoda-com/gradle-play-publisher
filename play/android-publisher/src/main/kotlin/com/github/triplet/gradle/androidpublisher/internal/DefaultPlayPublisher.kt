@@ -160,9 +160,14 @@ internal class DefaultPlayPublisher(
         override fun create(
                 credentials: File,
                 email: String?,
-                appId: String
+                appId: String,
+                connectTimeout: Int?,
+                readTimeout: Int
         ): PlayPublisher {
-            val publisher = createPublisher(ServiceAccountAuth(credentials, email))
+            val publisher = createPublisher(
+                ServiceAccountAuth(credentials, email),
+                NetworkConfiguration(connectTimeout, readTimeout)
+            )
             return DefaultPlayPublisher(publisher, appId)
         }
     }
