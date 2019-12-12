@@ -74,6 +74,8 @@ interface PlayPublisher {
          * @param credentials the creds to be converted to a GoogleCredential
          * @param email if the creds are of type PKCS, the service account email
          * @param appId the app's package name
+         * @param connectTimeout milliseconds to wait for connection
+         * @param readTimeout milliseconds to wait for reading the data or 0 for infinite
          */
         fun create(
                 credentials: File,

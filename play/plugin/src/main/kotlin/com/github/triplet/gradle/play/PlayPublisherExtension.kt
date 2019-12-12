@@ -216,6 +216,7 @@ open class PlayPublisherExtension @JvmOverloads constructor(
             _config.artifactDir = value
         }
 
+    /** Specify the amount of milliseconds the plugin will wait for connection to every endpoint. */
     @get:Optional
     @get:Input
     var connectTimeout: Int?
@@ -224,6 +225,10 @@ open class PlayPublisherExtension @JvmOverloads constructor(
             _config.connectTimeout = value
         }
 
+    /**
+     * Specify the amount of milliseconds the plugin will wait for data reading from every endpoint.
+     * 0 is default value and is treated as infinite timeout.
+     */
     @get:Optional
     @get:Input
     var readTimeout: Int
